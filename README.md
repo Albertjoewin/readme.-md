@@ -1,5 +1,6 @@
 # readme.-md
 Overview:
+
 The app will initially take some inputs from the user whether he/she is interested in losing/maintaining/gaining muscle and some extra information regarding the same. Based on the inputs, the software will map the videos, diet and schedule them for the particular user. Further, the app keeps track of the workouts and diet maintained by the user and gives him a score to assess his discipline.
 
 database:
