@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracklife - Register</title>
+    
+
+     <!-- favicon  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/style_login_register.css">
+
+
+  <!-- google font link -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;700;800;900&family=Rubik:wght@400;500;800&display=swap"
+  rel="stylesheet">
+
+
+  <!-- preload images -->
+<link rel="preload" as="image" href="./assets/images/login.jpg">
+
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+
+<!-- Body -->
+<body>
+    <div class="container">
+        <div class="row">
+            <img src="./assets/images/login.jpg" alt="img" class="img">
+        </div>
+        <div class="row">
+            <form action="#" class="form active" id="login">
+                <a href="#" class="logo">
+                    <ion-icon name="barbell-sharp" aria-hidden="true"></ion-icon>
+            
+                    <span class="span">TrackLife</span>
+
+                </a>
+                <h2>Register</h2>
+                <label for="name">Username</label>
+                <div class="pass-reset" onclick="activeInput(this)">
+                    <input type="username" name="username" class="username" id="usernameInput" placeholder="Enter your Username here">
+                </div>
+                <label for="email">Email Address</label>
+                <div class="pass-reset" onclick="activeInput(this)">
+                    <input type="email" name="email" class="email" id="emailInput" placeholder="name@mail.com">
+                </div>
+                <label for="password">Password</label>
+                <div class="pass-reset" onclick="activeInput(this)">
+                    <input type="password" class="password" name="password" id="passwordInput" placeholder="**********">
+                </div>
+                <button class="btn btn-register" id="register">Register</button>
+                <p>Don't have an account? <a onclick="changeToLogin()" id="changeToLogin">Sign in</a></p>
+                <p class="or">or</p>
+                <button class="btn btn-gogle-auth"><i class="google ri-google-fill"></i>Authorize with Google</button>
+            </form>
+
+    <!-- JS -->
+    <script src="./assets/js/script.js"></script>
+    
+    
+  <!--- ionicon link --->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBC2foBTJ5qBnUrOeLaONtcaVTQkBwa-F8",
+      authDomain: "tracklife-faizuoffl.firebaseapp.com",
+      databaseURL: "https://tracklife-faizuoffl-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "tracklife-faizuoffl",
+      storageBucket: "tracklife-faizuoffl.appspot.com",
+      messagingSenderId: "687512685948",
+      appId: "1:687512685948:web:7db839d231a7151a21a8f9",
+      measurementId: "G-TRWD8R86ER"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+register.addEventListener('click',(e) => {
+
+  var email = document.getElementById('emailInput').value;
+  var password = document.getElementById('passwordInput').value;
+  var username = document.getElementById('usernameInput').value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+
+    set(ref(database, 'users/' + user.uid),{
+      username: usernameInput,
+      email: emailInput,
+    })
+    alert('Account Created!');
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    alert(errorMessage);
+    // ..
+  });
+
+});
+  </script>
+
+</html>
